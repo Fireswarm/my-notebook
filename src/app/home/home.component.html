@@ -1,0 +1,12 @@
+<section>
+    <form>
+        <textarea [(ngModel)]="defaultValue" name="entry" placeholder="Write about your day" rows="10" #update></textarea>
+        <button class="primary" type="button" (click)="updateToday(update.value)">Update</button>
+    </form>
+</section>
+<section class="previous">
+    <app-log
+    *ngFor="let date of previousLogs.reverse()"
+    [date]="date">
+    </app-log>
+</section>

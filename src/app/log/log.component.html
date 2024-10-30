@@ -1,0 +1,8 @@
+<p><br>
+    {{date.date.toLocaleString('default', { month: 'long' })}} {{date.date.getDate()}}, {{date.date.getFullYear()}}
+    <app-entry
+    *ngFor="let entry of date.entries"
+    [entry]="entry">
+    </app-entry>
+    <br>
+</p>
