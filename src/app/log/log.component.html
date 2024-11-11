@@ -1,7 +1,7 @@
 <p><br>
-    {{date.date.toLocaleString('default', { month: 'long' })}} {{date.date.getDate()}}, {{date.date.getFullYear()}}
+    {{dateLog.date.toLocaleString('default', { month: 'long' })}} {{dateLog.date.getDate()}}, {{dateLog.date.getFullYear()}}
     <app-entry
-    *ngFor="let entry of date.entries"
+    *ngFor="let entry of dateLog.entries"
     [entry]="entry">
     </app-entry>
     <br>

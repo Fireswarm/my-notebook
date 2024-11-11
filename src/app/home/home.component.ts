@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { afterRender, Component } from '@angular/core';
 import { LogComponent } from "../log/log.component";
 import { FormsModule } from '@angular/forms';
 import { DateLog } from '../date-log';
 import { PostEntry } from '../post-entry';
+import { LocalStorageService } from '../local-storage.service';
 
 
 @Component({
@@ -16,6 +17,21 @@ import { PostEntry } from '../post-entry';
 export class HomeComponent {
   previousLogs:DateLog[] = [];
   defaultValue: string = '';
+  tempLogs:string = '';
+  
+  constructor(private localStorageService:LocalStorageService){}
+  
+  ngOnInit(): void{
+    this.tempLogs = this.localStorageService.getItem("logs") || ''
+    
+    if(this.tempLogs != ''){
+      var textLogs:DateLog[] = JSON.parse(this.tempLogs)
+      textLogs.forEach(element => {
+        element.date = new Date(element.date)
+      });
+      this.previousLogs = textLogs
+    }
+  }
   
   updateToday(text:string){
     if (text) {
@@ -42,9 +58,14 @@ export class HomeComponent {
       else {
         todayEntry.entries.push(newEntry)
       }
+
       
+      this.localStorageService.setItem("logs", JSON.stringify(this.previousLogs))
       this.defaultValue = ''
     }
     
+  }
+  clearStorage(){
+    this.localStorageService.clear()
   }
 }

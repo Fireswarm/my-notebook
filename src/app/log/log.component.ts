@@ -11,5 +11,5 @@ import { EntryComponent } from '../entry/entry.component';
   styleUrl: './log.component.css'
 })
 export class LogComponent {
-  @Input() date!:DateLog
+  @Input() dateLog!:DateLog
 }
